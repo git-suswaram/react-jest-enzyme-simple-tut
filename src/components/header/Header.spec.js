@@ -1,8 +1,26 @@
-import React from 'react';
-import {shallow} from 'enzyme'
-import Header from './index'
+import React from "react";
+import { shallow } from "enzyme";
+import Header from "./index";
+import { findByTestAttr } from "./../../../utils";
+ß
+const setup = (props = {}) => {
+  const component = shallow(<Header {...props} />);
+  return component;
+};
+
+describe("Header Component", () => {
+  let component;
+  beforeEach(() => {
+    component = setup();
+  });
 
   it("should render without errors", () => {
-    expect(1).toBe(1)
-
+    const wrapper = findByTestAttr(component, "headerComponent");
+    expect(wrapper.length).toBe(1);
   });
+
+  it("should render a logo", () => {
+    const wrapper = findByTestAttr(component, "logoIMG");
+    expect(wrapper.length).toBe(1);
+  });
+});
